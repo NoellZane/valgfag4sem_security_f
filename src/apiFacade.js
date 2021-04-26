@@ -1,8 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import { localURL as URL } from "./settings.js";
-import { onlineURL as URL } from "./settings.js";
+import { localURL as URL } from "./settings.js";
+//import { onlineURL as URL } from "./settings.js";
 import { userURL } from "./settings.js";
-import { fetchURL } from "./settings.js";
+//import { fetchURL } from "./settings.js";
 
 function handleHttpErrors(res) {
     if (!res.ok) {
@@ -47,7 +47,7 @@ function apiFacade() {
 
     //The Roles parameter is passed in as parameter from the LoggedIn component in the App.js
     const fetchRoles = roles => {
-        let userType = "none"; //Default role is none
+        let userType = "user"; //Default role is none
         if (roles.includes("user") && roles.includes("admin")) userType = "admin"; //If it's both user and Admin we use the admin login endpoint
         else if (roles.includes("user")) userType = "user";
         else if (roles.includes("admin")) userType = "admin";

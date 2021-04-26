@@ -27,6 +27,7 @@ function App() {
 
   const login = (user, pass) => { 
     facade.login(user,pass,setRoles)
+    //console.log(roles)
     .then(res =>setLoggedIn(true))
     .catch(err => {
       if (err.status) {
