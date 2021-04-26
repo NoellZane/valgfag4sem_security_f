@@ -42,7 +42,7 @@ function App() {
  
     return(
       <div>
-  <Header />
+  <Header roles={roles} />
   <Switch>
     <Route exact path="/">
       <Home />
