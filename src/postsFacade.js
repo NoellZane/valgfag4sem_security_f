@@ -4,12 +4,19 @@ import apiFacade from "./apiFacade"
 
 function postsFacade () {
 
-    const getPostById = (id) => {
-        return fetch(URL + `${id}`, apiFacade.makeOptions("GET", true))
-        .then(handleHttpErrors);
+
+    const addPost = (post) => {
+        return fetch(URL, apiFacade.makeOptions("POST", true, post))
+        .then(handleHttpErrors)
     }
 
-    return { getPostById };
+    const getPostById = (id) => {
+        return fetch(URL + `${id}`, apiFacade.makeOptions("GET", true))
+        .then(handleHttpErrors)
+    }
+
+    return { addPost,
+    getPostById };
 }
 
 /*det var meningen, at jeg ville importere handleHttpErrors,

@@ -4,6 +4,7 @@ import pFacade from "../postsFacade"
 
 export default function Posts() {
     const [post, setPost] = useState([]);
+    const [addPost, setAddPost] = useState({ 'postId': 0, 'text': ''})
     const [message, setMessage] = useState(null);
     let {postId} = useParams();
 
@@ -26,29 +27,25 @@ export default function Posts() {
       }, [])
       
 
+
+    const handleChange = (event) => {
+      setAddPost({ ...addPost, [event.target.name]: e.target.value })
+    }
+
+    const handleSubmit = (event) => {
+      event.preventDefault()
+      addPost.postId = postId
+      pFacade.addPost(addPost)
+      .then(data => {
+        var refresh = [...post]
+        refresh.push(data)
+        setPost(refresh)
+        setAddPost({ 'postId': 0, 'text': ''})
+      })
+    }
+
     return (
-    
-  <table className="table" style={{width: "90%"}}>
-      <thead>
-        <tr>
-          <th>Hallloj</th>
-          <th></th>
-        </tr>
-      </thead>
-
-      <tbody>{post.map((posts) => {
-        return (
-          <tr key={posts.id}>
-            <td>{posts.userId}</td>
-            <td>{posts.text}</td>
-          </tr>
-          )})}
-      </tbody>
-
-      
-  </table>
-    
-     
+      <div className="text">hej</div>
     )
 }
   
