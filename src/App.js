@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import Register from "./components/Register";
 import Edit from "./components/Edit";
 import Admin from "./components/Admin";
+import Posts from "./components/Posts";
 import { LogIn, LoggedIn } from "./components/Login.js";
 
 
@@ -65,6 +66,9 @@ function App() {
     </Route>
     <Route>
       <NoMatch/>
+    </Route>
+    <Route>
+      <Posts/>
     </Route>
   </Switch>
   </div>
