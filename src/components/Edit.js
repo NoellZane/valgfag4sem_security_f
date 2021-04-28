@@ -86,7 +86,7 @@ export default function Post({ loggedIn }) {
             onChange={handleChange}
             value={post}>
             </textarea>
-            
+
             <hr></hr>
             
             <button type="submit"
@@ -96,8 +96,7 @@ export default function Post({ loggedIn }) {
             </button>
 
             {toShow}
-
-
+            
             </div>
         </div>
       </div>
