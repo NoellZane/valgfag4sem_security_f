@@ -1,52 +1,104 @@
 import React, { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
 import pFacade from "../api/postFacade"
+import aFacade from "../api/apiFacade"
+import jwtdecode from "jwt-decode"
 
 
-export default function Posts() {
-    const [post, setPost] = useState([]);
-    const [addPost, setAddPost] = useState({ 'postId': 0, 'text': ''})
-    const [message, setMessage] = useState("");
-    let {postId} = useParams();
+
+export default function Post({ loggedIn }) {
+    const [data, setData] = useState([]);
+    const [post, setPost] = useState("");
+    const [title, setTitle] = useState("")
+    const [username, setUsername] = useState("");
 
     
     useEffect(() => {
-        pFacade.getPostsById(postId)
-          .then(data => setPost([...data]))
-          .catch((err) => {
-            if (err.status) {
-            err.fullError.then((e) => {
-            console.log(e.message);
-            setMessage(e.message);
-            });
-          } else {
-            console.log("Error occurred!");
-            setMessage("Error occurred!");
-            }
-
+        pFacade.fetchPosts()
+          .then((data) => {
+            setData(data);
           });
       }, [])
       
 
 
     const handleChange = (event) => {
-      setAddPost({ ...addPost, [event.target.name]: event.target.value })
+      event.preventDefault()
+      const value = event.target.value 
+      setPost(value);
     }
+    
 
     const handleSubmit = (event) => {
       event.preventDefault()
-      addPost.postId = postId
-      pFacade.addPost(addPost)
-      .then(data => {
-        var refresh = [...post]
-        refresh.push(data)
-        setPost(refresh)
-        setAddPost({ 'postId': 0, 'text': ''})
+      pFacade.addPost(post, username.username, title)
+      .then(() => {
+        pFacade.fetchPosts()
+        .then((data) => {
+          setData(data);
+        })
       })
+
+      setPost("");
+
     }
 
+    useEffect(() => {
+      if (loggedIn) {
+        const token = aFacade.getToken();
+        const decodedToken = jwtdecode(token);
+        setUsername(decodedToken);
+
+      }
+    }, [loggedIn])
+
+    const toShow = data ? (
+
+      <div>
+        {data.length > 0 ? data.map((m, index) => (
+          <div key={index}>
+            <p>{m.post}</p>
+            <p>{m.username}</p>
+            <p>{m.createdOn}</p>
+          </div>
+
+            //delete button her
+
+        )) : (
+          ""
+        )}
+    </div>
+    ) : (
+      "loading..."
+    )
+
     return (
-      <div className="text">hej</div>
+
+      <div className="container">
+        <div className="row">
+          <div className="col-5"></div>
+          <div className="col-5 text-center">
+            <h3 className="mt-5">CoffeeRoom Posts</h3>
+            <hr></hr>
+
+            <textarea className="form-control"
+            id="text"
+            rows="3"
+            onChange={handleChange}
+            value={post}>
+            </textarea>
+
+            <button type="submit"
+            className="text-center"
+            onClick={handleSubmit}>
+              Add Post
+            </button>
+
+            {toShow}
+
+
+            </div>
+        </div>
+      </div>
     )
 }
   

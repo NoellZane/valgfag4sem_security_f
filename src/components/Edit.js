@@ -1,62 +1,106 @@
 import React, { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
 import pFacade from "../api/postFacade"
+import aFacade from "../api/apiFacade"
+import jwtdecode from "jwt-decode"
 
-//BARE ROLIG POST DELEN, SKAL IKKE VÆRE HER
-//MEN JEG KAN IKKE FÅ LOV TIL AT KIGGE PÅ POST SIDEN
-//SÅ FOR AT KUNNE SE HVAD JEG LAVEDE, BLEV JEG NØDT TIL AT BRUGE EDIT SIDEN 
-//HEHE
-//HILSEN SELINA
 
-export default function Edit() {
-    const [post, setPost] = useState([]);
-    const [addPost, setAddPost] = useState({ 'postId': 0, 'text': ''})
-    const [message, setMessage] = useState("");
-    let {postId} = useParams();
+
+export default function Post({ loggedIn }) {
+    const [data, setData] = useState([]);
+    const [post, setPost] = useState("");
+    const [title, setTitle] = useState("")
+    const [username, setUsername] = useState("");
 
     
     useEffect(() => {
-        pFacade.getPostById(postId)
-          .then(data => setPost([...data]))
-          .catch((err) => {
-            if (err.status) {
-            err.fullError.then((e) => {
-            console.log(e.message);
-            setMessage(e.message);
-            });
-          } else {
-            console.log("Error occurred!");
-            setMessage("Error occurred!");
-            }
-
+        pFacade.fetchPosts()
+          .then((data) => {
+            setData(data);
           });
       }, [])
       
 
 
     const handleChange = (event) => {
-      setAddPost({ ...addPost, [event.target.name]: event.target.value })
+      event.preventDefault()
+      const value = event.target.value 
+      setPost(value);
     }
+    
 
     const handleSubmit = (event) => {
       event.preventDefault()
-      addPost.postId = postId
-      pFacade.addPost(addPost)
-      .then(data => {
-        var refresh = [...post]
-        refresh.push(data)
-        setPost(refresh)
-        setAddPost({ 'postId': 0, 'text': ''})
+      pFacade.addPost(post, username.username, title)
+      .then(() => {
+        pFacade.fetchPosts()
+        .then((data) => {
+          setData(data);
+        })
       })
+
+      setPost("");
+
     }
 
-    return (
-      <div className="addPost">
-        <form handleChange={handleChange}>
-          <text row="10" col="10" placeholder="content" id="text" />
-          <button onClick={handleSubmit}>Add post</button>
-          </form></div>
+    useEffect(() => {
+      if (loggedIn) {
+        const token = aFacade.getToken();
+        const decodedToken = jwtdecode(token);
+        setUsername(decodedToken);
 
+      }
+    }, [loggedIn])
+
+    const toShow = data ? (
+
+      <div>
+        {data.length > 0 ? data.map((m, index) => (
+          <div key={index}>
+            <p>{m.post}</p>
+            <p>{m.username}</p>
+            <p>{m.createdOn}</p>
+          </div>
+
+            //delete button her
+
+        )) : (
+          ""
+        )}
+    </div>
+    ) : (
+      "loading..."
+    )
+
+    return (
+
+      <div className="container">
+        <div className="row">
+          <div className="col-10 text-center">
+            <h3 className="mt-5">Make a post in CoffeeRoom</h3>
+
+            <hr></hr>
+
+            <textarea className="form-control"
+            id="text"
+            rows="5"
+            onChange={handleChange}
+            value={post}>
+            </textarea>
+            
+            <hr></hr>
+            
+            <button type="submit"
+            className="text-center"
+            onClick={handleSubmit}>
+              Add Post
+            </button>
+
+            {toShow}
+
+
+            </div>
+        </div>
+      </div>
     )
 }
   

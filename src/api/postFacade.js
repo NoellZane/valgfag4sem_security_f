@@ -1,31 +1,57 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { postURL as URL } from "../utils/settings.js"
-import apiFacade from "../api/apiFacade"
-
-function postsFacade () {
 
 
-    const addPost = (post) => {
-        return fetch(URL, apiFacade.makeOptions("POST", true, post))
-        .then(handleHttpErrors)
-    }
 
-    const getPostById = (id) => {
-        return fetch(URL + `${id}`, apiFacade.makeOptions("GET", true))
-        .then(handleHttpErrors)
-    }
-
-    return { addPost,
-    getPostById };
+//for at poste, skal man være logget ind
+const getToken = () => {
+    return localStorage.getItem('jwtToken')
 }
 
-/*det var meningen, at jeg ville importere handleHttpErrors,
-øverst oppe: import apiFacade, { handleHttpErrors } from blabla.
-Men det kunne jeg ikke få lov til fordi den ikke exporteres fra
-apiFacaden. Jeg ville ikke ændre noget, så derfor satte jeg den 
-bare ind her i postsFacade. Det klart for at undgå gentagelser,
-så kunne det være fedest at bare importere den fra apiFacade.
-*/
+//log ind
+const loggedIn = () => {
+    const loggedIn = getToken() != null;
+    return loggedIn;
+}
+
+//metode ikke i backend endnu
+function fetchPosts () {
+    return fetch(URL + "allPosts")
+    .then(handleHttpErrors)
+    .catch((err) => {
+        console.log(err)
+        if (err.status) {
+            err.fullError.then((event) => 
+            console.log(event.message));
+        } else {
+            console.log("Network error");
+        }})
+    }
+
+function addPost(text, title, username) {
+    const options = makeOptions("POST", true, {
+        text,
+        title,
+        username,
+    })
+
+    return fetch(URL + "addpost", options)
+    .then(handleHttpErrors)
+    .catch((err) => {
+        console.log(err)
+        if (err.status) {
+            err.fullError.then((event) => 
+            console.log(event.message));
+        } else {
+            console.log("Network error");
+        }})
+    }
+
+
+const postFacade = {
+    fetchPosts,
+    addPost,
+}
 
 function handleHttpErrors(res) {
     if (!res.ok) {
@@ -34,5 +60,24 @@ function handleHttpErrors(res) {
     return res.json();
 }
 
-const pFacade = postsFacade();
-export default pFacade;
+const makeOptions = (method, addToken, body) => {
+    var opts = {
+        method: method,
+        headers: {
+            "Content-type": "application/json",
+            'Accept': 'application/json',
+        }
+    }
+    if (addToken && loggedIn()) {
+        opts.headers["x-access-token"] = getToken();
+    }
+    if (body) {
+        opts.body = JSON.stringify(body);
+    }
+    return opts;
+}
+
+
+
+
+export default postFacade;
