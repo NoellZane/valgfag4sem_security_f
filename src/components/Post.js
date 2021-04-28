@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
-import pFacade from "../postsFacade"
+import pFacade from "../api/postFacade"
+
 
 export default function Posts() {
     const [post, setPost] = useState([]);
     const [addPost, setAddPost] = useState({ 'postId': 0, 'text': ''})
-    const [message, setMessage] = useState(null);
+    const [message, setMessage] = useState("");
     let {postId} = useParams();
 
     
@@ -29,7 +30,7 @@ export default function Posts() {
 
 
     const handleChange = (event) => {
-      setAddPost({ ...addPost, [event.target.name]: e.target.value })
+      setAddPost({ ...addPost, [event.target.name]: event.target.value })
     }
 
     const handleSubmit = (event) => {

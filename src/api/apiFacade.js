@@ -1,8 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { localURL as URL } from "./settings.js";
-//import { onlineURL as URL } from "./settings.js";
-import { userURL } from "./settings.js";
-//import { fetchURL } from "./settings.js";
+import { localURL as URL } from "../utils/settings.js";
+//import { onlineURL as URL } from "../utils/settings.js";
+import { userURL } from "../utils/settings.js";
+//import { fetchURL } from "../utils/settings.js";
 
 function handleHttpErrors(res) {
     if (!res.ok) {

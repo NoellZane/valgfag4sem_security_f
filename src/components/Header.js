@@ -12,8 +12,11 @@ return(
     <li><NavLink activeClassName="selected" to="/login">Login</NavLink></li>
     <li><NavLink activeClassName="selected" to="/register">Register</NavLink></li>
     <li><NavLink activeClassName="selected" to="/edit">Edit</NavLink></li>
+    <li><NavLink activeClassName="selected" to="/post">Post</NavLink></li>
     {roles==='["admin"]' && <li><NavLink activeClassName="selected" to="/admin">Admin</NavLink></li>}
-    {roles==='["user"]' && <li><NavLink activeClassName="selected" to="/posts">Posts</NavLink></li>}
+
+{/* 
+    {roles==='["user"]' && <li><NavLink activeClassName="selected" to="/post">Post</NavLink></li>} */}
 
     </ul>
 );

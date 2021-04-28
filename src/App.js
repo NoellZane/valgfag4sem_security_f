@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from "react"
-import facade from "./apiFacade";
+import facade from "./api/apiFacade";
 import "./App.css"
 import Home from "./components/Home";
 import NoMatch from "./components/NoMatch";
@@ -7,7 +7,7 @@ import Header from "./components/Header";
 import Register from "./components/Register";
 import Edit from "./components/Edit";
 import Admin from "./components/Admin";
-import Posts from "./components/Posts";
+import Post from "./components/Post";
 import { LogIn, LoggedIn } from "./components/Login.js";
 
 
@@ -67,9 +67,11 @@ function App() {
     <Route>
       <NoMatch/>
     </Route>
-    <Route>
-      <Posts/>
-    </Route>
+
+    <Route path ="/post">
+      <Post />
+      </Route>
+
   </Switch>
   </div>
     );

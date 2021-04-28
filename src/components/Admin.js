@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from "react"
-import facade from "../apiFacade";
+import facade from "../api/apiFacade";
 
 export default function Admin() {
     const [render, setRender] = useState(false);

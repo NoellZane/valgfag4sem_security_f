@@ -1,4 +1,4 @@
-import facade from "../apiFacade";
+import facade from "../api/apiFacade";
 import React, { useState, useEffect } from "react";
 
 export default function Register() {

@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { postURL as URL } from "./settings.js"
-import apiFacade from "./apiFacade"
+import { postURL as URL } from "../utils/settings.js"
+import apiFacade from "../api/apiFacade"
 
 function postsFacade () {
 
