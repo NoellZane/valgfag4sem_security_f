@@ -3,7 +3,16 @@ import pFacade from "../api/postFacade"
 import aFacade from "../api/apiFacade"
 import jwtdecode from "jwt-decode"
 
-
+export default function Post(props) {
+  return (
+    <div>
+      <h2>Post</h2>
+      <p>This is Post</p>
+      <p>{props.id}</p>
+    </div>
+  );
+}
+/*
 
 export default function Post({ loggedIn }) {
     const [data, setData] = useState([]);
@@ -100,5 +109,4 @@ export default function Post({ loggedIn }) {
         </div>
       </div>
     )
-}
-  
+}*/

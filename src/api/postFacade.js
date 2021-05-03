@@ -1,57 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { postURL as URL } from "../utils/settings.js"
-
-
-
-//for at poste, skal man være logget ind
-const getToken = () => {
-    return localStorage.getItem('jwtToken')
-}
-
-//log ind
-const loggedIn = () => {
-    const loggedIn = getToken() != null;
-    return loggedIn;
-}
-
-//metode ikke i backend endnu
-function fetchPosts () {
-    return fetch(URL + "allPosts")
-    .then(handleHttpErrors)
-    .catch((err) => {
-        console.log(err)
-        if (err.status) {
-            err.fullError.then((event) => 
-            console.log(event.message));
-        } else {
-            console.log("Network error");
-        }})
-    }
-
-function addPost(text, title, username) {
-    const options = makeOptions("POST", true, {
-        text,
-        title,
-        username,
-    })
-
-    return fetch(URL + "addpost", options)
-    .then(handleHttpErrors)
-    .catch((err) => {
-        console.log(err)
-        if (err.status) {
-            err.fullError.then((event) => 
-            console.log(event.message));
-        } else {
-            console.log("Network error");
-        }})
-    }
-
-
-const postFacade = {
-    fetchPosts,
-    addPost,
-}
+import { postURL } from "../utils/settings.js"
 
 function handleHttpErrors(res) {
     if (!res.ok) {
@@ -59,6 +7,48 @@ function handleHttpErrors(res) {
     }
     return res.json();
 }
+
+/*--------------------------------------------------------------*/ 
+
+const getToken = () => {
+    return localStorage.getItem('jwtToken')
+}
+
+/*--------------------------------------------------------------*/ 
+
+const loggedIn = () => {
+const loggedIn = getToken() != null;
+return loggedIn;
+}
+
+/*--------------------------------------------------------------*/ 
+
+
+function postFacade () {
+
+const getAllPosts = () => {
+    let options = makeOptions("GET", true);
+    return fetch(postURL + "all", options)
+    .then(handleHttpErrors)
+}
+
+const getPostsByUser = (username) => {
+    let options = makeOptions("GET", true);
+    return fetch(postURL + "all" + username, options)
+    .then(handleHttpErrors)
+}
+
+const addPost = (text, title, username) => {
+    let options = makeOptions("POST", true, {
+        text,
+        title,
+        username
+
+    })
+    return fetch(postURL + "addpost", options)
+    .then(handleHttpErrors)
+}
+
 
 const makeOptions = (method, addToken, body) => {
     var opts = {
@@ -77,7 +67,14 @@ const makeOptions = (method, addToken, body) => {
     return opts;
 }
 
+return {
+    makeOptions,
+    getAllPosts,
+    getPostsByUser,
+    addPost
+}
 
+}
 
-
-export default postFacade;
+const facade = postFacade();
+export default facade;

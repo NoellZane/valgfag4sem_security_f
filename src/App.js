@@ -5,9 +5,11 @@ import Home from "./components/Home";
 import NoMatch from "./components/NoMatch";
 import Header from "./components/Header";
 import Register from "./components/Register";
-import Edit from "./components/Edit";
+import AllPosts from "./components/AllPosts";
 import Admin from "./components/Admin";
 import Post from "./components/Post";
+import AddPost from "./components/AddPost";
+
 import { LogIn, LoggedIn } from "./components/Login.js";
 
 
@@ -58,9 +60,14 @@ function App() {
     <Route path ="/register">
       <Register />
     </Route>
-    <Route path ="/edit">
-      <Edit />
+    <Route path ="/allPosts">
+      <AllPosts />
     </Route>
+    <Route path ="/addPost">
+      <AddPost />
+    </Route>
+
+
     <Route>
       <Admin />
     </Route>
@@ -68,9 +75,9 @@ function App() {
       <NoMatch/>
     </Route>
 
-    <Route path ="/post">
+    <Route>
       <Post />
-      </Route>
+    </Route>
 
   </Switch>
   </div>

@@ -11,7 +11,9 @@ return(
     <li><NavLink exact activeClassName="selected" to="/">Home</NavLink></li>
     <li><NavLink activeClassName="selected" to="/login">Login</NavLink></li>
     <li><NavLink activeClassName="selected" to="/register">Register</NavLink></li>
-    <li><NavLink activeClassName="selected" to="/edit">Edit</NavLink></li>
+    <li><NavLink activeClassName="selected" to="/allPosts">All Posts</NavLink></li>
+    <li><NavLink activeClassName="selected" to="/addPost">Add Post</NavLink></li>
+
     <li><NavLink activeClassName="selected" to="/post">Post</NavLink></li>
     {roles==='["admin"]' && <li><NavLink activeClassName="selected" to="/admin">Admin</NavLink></li>}
 
