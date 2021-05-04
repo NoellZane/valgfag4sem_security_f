@@ -1,15 +1,17 @@
-import React, { useState,useEffect } from "react"
+import "bootstrap/dist/css/bootstrap.min.css";
+import './App.css';
+
+import React, { useState } from "react"
 import facade from "./api/apiFacade";
-import "./App.css"
+
 import Home from "./components/Home";
 import NoMatch from "./components/NoMatch";
 import Header from "./components/Header";
 import Register from "./components/Register";
 import AllPosts from "./components/AllPosts";
 import Admin from "./components/Admin";
-import Post from "./components/Post";
+//import Post from "./components/Post";
 import AddPost from "./components/AddPost";
-
 import { LogIn, LoggedIn } from "./components/Login.js";
 
 
@@ -17,21 +19,30 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  useHistory
 } from "react-router-dom";
   
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false)
+  const [isLoggedIn, setLoggedIn] = useState(false);
   const [roles, setRoles] = useState([]);
+  // loginMsg changes from Login to Logout depending on the users status
+  const [loginMsg, setLoginMsg] = useState("Login");
 
-  const logout = () => {    
-    facade.logout()
-    setLoggedIn(false) } 
+  let history = useHistory();
+
+  const logout = () => {   
+    setLoginMsg("Login");
+    facade.logout();
+    setLoggedIn(false);
+    history.push("/");
+  } 
 
   const login = (user, pass) => { 
+    setLoginMsg("Logout")
     facade.login(user,pass,setRoles)
     //console.log(roles)
-    .then(res =>setLoggedIn(true))
+    .then(res =>setLoggedIn(true) && history.push("/"))
     .catch(err => {
       if (err.status) {
         err.fullError.then(e => {
@@ -44,43 +55,52 @@ function App() {
    } 
  
     return(
-      <div>
-  <Header roles={roles} />
-  <Switch>
-    <Route exact path="/">
-      <Home />
-    </Route>
-    <Route path="/login">
-    {!loggedIn ? (<LogIn login={login} />) :
-   (<div>
-   <LoggedIn roles={roles}/>
-   <button onClick={logout}>Logout</button>
-    </div>)}
-    </Route>
-    <Route path ="/register">
-      <Register />
-    </Route>
-    <Route path ="/allPosts">
-      <AllPosts />
-    </Route>
-    <Route path ="/addPost">
-      <AddPost />
-    </Route>
+      <Router>
+        <div>
+          <Header 
+            loginMsg={loginMsg}
+            isLoggedIn={isLoggedIn}
+            roles={roles} 
+          />
 
+          <div className="content">
+            <Switch>
+              <Route exact path="/">
+                <Home />
+              </Route>
 
-    <Route>
-      <Admin />
-    </Route>
-    <Route>
-      <NoMatch/>
-    </Route>
+              <Route path="/login">
+                {!isLoggedIn ? (<LogIn login={login} />) :
+                  (<div>
+                  <LoggedIn roles={roles}/>
+                  <button onClick={logout}>{loginMsg}</button>
+                </div>)}
+              </Route>
 
-    <Route>
-      <Post />
-    </Route>
+              <Route path ="/register">
+                <Register />
+              </Route>
 
-  </Switch>
-  </div>
+              <Route path ="/allPosts">
+                <AllPosts />
+              </Route>
+
+              <Route path ="/addPost">
+                <AddPost loggedIn={isLoggedIn}/>
+              </Route>
+
+              <Route path ="/admin">
+                <Admin />
+              </Route>
+
+              <Route>
+                <NoMatch />
+              </Route>
+
+            </Switch>
+          </div>  
+        </div>
+      </Router>
     );
 }
 

@@ -17,8 +17,8 @@ const getToken = () => {
 /*--------------------------------------------------------------*/ 
 
 const loggedIn = () => {
-const loggedIn = getToken() != null;
-return loggedIn;
+    const loggedIn = getToken() != null;
+    return loggedIn;
 }
 
 /*--------------------------------------------------------------*/ 
@@ -38,18 +38,28 @@ const getPostsByUser = (username) => {
     .then(handleHttpErrors)
 }
 
+function addPost(newPost) {
+    let options = makeOptions("POST", false, newPost);
+    //console.log("Token: " + getToken())
+    options.headers["x-access-token"] = getToken();
+    return fetch(postURL, options) //Returns promise
+        .then(handleHttpErrors);
+}
+/*
 const addPost = (text, title, username) => {
     let options = makeOptions("POST", true, {
-        text,
         title,
+        text,
         username
 
     })
-    return fetch(postURL + "addpost", options)
+    console.log(options);
+    console.log(options.username);
+    return fetch(postURL, options)
     .then(handleHttpErrors)
 }
 
-
+*/
 const makeOptions = (method, addToken, body) => {
     var opts = {
         method: method,

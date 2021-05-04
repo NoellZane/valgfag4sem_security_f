@@ -5,13 +5,16 @@ import App from "./App";
 import { BrowserRouter as Router} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 
+const AppWithRouter = () => {
+  return (
+    <Router>
+      <App />
+    </Router>
+  );
+};
 
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Router>
-    <App />
-    </Router>
-  </React.StrictMode>,
+  <AppWithRouter />, 
   document.getElementById("root")
 );

@@ -46,7 +46,7 @@ export default function Register() {
   return (
     <div>
       <h2>Register a user!</h2>
-      <label for="username">Username</label>
+      <label htmlFor="username">Username</label>
       <br></br>
       <input
         type="text"
@@ -56,7 +56,7 @@ export default function Register() {
       />
       <br></br>
 
-      <label for="password">Password</label>
+      <label htmlFor="password">Password</label>
       <br></br>
       <input
         type="password"
@@ -66,7 +66,7 @@ export default function Register() {
       />
       <br></br>
 
-      <label for="password2">Re-enter password</label>
+      <label htmlFor="password2">Re-enter password</label>
       <br></br>
       <input
         type="password"

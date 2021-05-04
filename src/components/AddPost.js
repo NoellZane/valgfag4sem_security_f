@@ -21,9 +21,9 @@ export default function AddPost({ loggedIn }) {
 
     const handleSubmit = (evt) => {
       evt.preventDefault()
-      pfacade.addPost(newPost)
       setNewPost({...emptyPost})
-      
+      newPost.username = username;
+      pfacade.addPost(newPost)
     }
 
     /*--------------------------------------------------------------*/
@@ -32,13 +32,12 @@ export default function AddPost({ loggedIn }) {
       if (loggedIn) {
         const token = afacade.getToken();
         const decodedToken = jwtdecode(token);
-        setUsername(decodedToken);
-
+        
+        setUsername(decodedToken.username);
       }
     }, [loggedIn])
 
     /*--------------------------------------------------------------*/
-
 
     return (
     
@@ -51,29 +50,23 @@ export default function AddPost({ loggedIn }) {
 
         <form className="addPost-form" onSubmit={handleSubmit}>
 
-        <input 
-        onChange={handleChange}
-        value={newPost.title}
-        className = "form-field"
-        placeholder = "Title"
-        id = "title"/>
+          <input 
+          onChange={handleChange}
+          value={newPost.title}
+          className = "form-field"
+          placeholder = "Title"
+          id = "title"/>
 
-        <input 
-        onChange={handleChange}
-        value={newPost.text}
-        className = "form-field"
-        placeholder = "Text"
-        id = "text"/>  
+          <input 
+          onChange={handleChange}
+          value={newPost.text}
+          className = "form-field"
+          placeholder = "Text"
+          id = "text"/>  
 
-        <input 
-        onChange={handleChange}
-        value={newPost.username}
-        className = "form-field"
-        placeholder = "Username"
-        id = "username"/> 
 
-        <button className = "form-field"
-        type="submit">Add Post</button>
+          <button className = "form-field"
+          type="submit">Add Post</button>
 
         </form>
     </div>
