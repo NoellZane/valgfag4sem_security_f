@@ -14,6 +14,7 @@ function AllPosts() {
           .then((data) => {
             setPosts(data);
           });
+          console.log(posts);
       }, [])
       
     try {
@@ -21,11 +22,11 @@ function AllPosts() {
 
         <React.Fragment>
           <div className="container">
-              <row>
+              <div className="row">
                 <h3 className="mt-5 text-center">CoffeeRoom Posts</h3>
-              </row>
+              </div>
               <hr></hr>
-              <row>
+              <div className="row">
                 <table className="table">
                   <thead>
                     <tr>
@@ -46,7 +47,7 @@ function AllPosts() {
                         </tr>)}
                   </tbody>
                 </table>
-              </row>
+              </div>
           </div>
         </React.Fragment>
       )
@@ -54,12 +55,12 @@ function AllPosts() {
       console.log("No posts error.")
       return (
         <div className="container">
-            <row>
+            <div className="row">
               <h3 className="mt-5 text-center">CoffeeRoom Posts</h3>
-            </row>
-            <row>
+            </div>
+            <div className="row">
               <h5>There are no posts yet.</h5>
-            </row>
+            </div>
         </div>
       )
     }
