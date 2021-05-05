@@ -83,10 +83,22 @@ export default function Admin() {
 
  return (    
     <div className="container mt-5">
-      <h2>Fetched Data</h2>
-      {!message && displayUsers}
-      <p>{message}</p>
-
+      <div className="row">
+        <div className="col-6">
+          <h2>Fetched Data</h2>
+        </div>
+        <div className="col-6">
+          <button onClick={getAllUsers} type="button" className="btn btn-success mt-2">
+              Reload table
+          </button>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-12">
+          {!message && displayUsers}
+          <p>{message}</p>
+        </div>
+      </div>
     </div>
     
   );
