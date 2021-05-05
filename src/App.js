@@ -81,16 +81,20 @@ function App() {
                 <Register />
               </Route>
 
-              <Route path ="/allPosts">
-                <AllPosts />
+
+              <Route path="/allPosts">
+                {!isLoggedIn ? (<NoMatch />) :
+                  (<AllPosts />)}
               </Route>
 
               <Route path ="/addPost">
-                <AddPost loggedIn={isLoggedIn}/>
+                {!isLoggedIn ? (<NoMatch />) :
+                (<AddPost loggedIn={isLoggedIn}/>)}
               </Route>
 
               <Route path ="/admin">
-                <Admin />
+                {!isLoggedIn ? (<NoMatch />) :
+                (<Admin />)}
               </Route>
 
               <Route>

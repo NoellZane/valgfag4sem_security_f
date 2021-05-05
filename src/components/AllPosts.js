@@ -37,6 +37,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
                       <th scope="col">Post title:</th>
                       <th scope="col">Post text:</th>
                       <th scope="col">Post created:</th>
+                      <th scope="col">Post edited:</th>
                     </tr>
                   </thead>
 
@@ -47,6 +48,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
                           <td>{p.title}</td>
                           <td>{p.text}</td>
                           <td>{p.dateCreated}</td>
+                          <td>{p.lastEdited}</td>
                         </tr>)}
                   </tbody>
                 </table>
