@@ -3,7 +3,7 @@ import facade from "../api/apiFacade";
 
 export default function Admin() {
     const [render, setRender] = useState(false);
-    const [dataFromServer, setDataFromServer] = useState(null);
+    //const [dataFromServer, setDataFromServer] = useState(null);
     const [message, setMessage] = useState(null);
     const [tableRows, setTableRows] = useState("");
 

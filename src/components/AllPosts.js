@@ -1,21 +1,23 @@
+
 import React, { useState, useEffect } from "react"
 import facade from "../api/postFacade"
 import "bootstrap/dist/css/bootstrap.min.css";
 
-
-function AllPosts() {
+  export default function AllPosts() {
 
     const [posts, setPosts] = useState([])
 
-
+    function fetchPosts(){
+      facade.getAllPosts()
+          .then((data) => {
+            setPosts(data.allPosts);
+          });
+    }
 
     useEffect(() => {
-        facade.getAllPosts()
-          .then((data) => {
-            setPosts(data);
-          });
-          console.log(posts);
-      }, [])
+      fetchPosts();
+    }, [])
+
       
     try {
       return (
@@ -26,11 +28,12 @@ function AllPosts() {
                 <h3 className="mt-5 text-center">CoffeeRoom Posts</h3>
               </div>
               <hr></hr>
+
               <div className="row">
                 <table className="table">
                   <thead>
                     <tr>
-                      <th scope="col">Posted by username:</th>
+                      <th scope="col">Posted by:</th>
                       <th scope="col">Post title:</th>
                       <th scope="col">Post text:</th>
                       <th scope="col">Post created:</th>
@@ -39,7 +42,7 @@ function AllPosts() {
 
                   <tbody>
                       {posts.map(p =>
-                        <tr key={p.username}>
+                        <tr key={p.id}>
                           <td>{p.username}</td>
                           <td>{p.title}</td>
                           <td>{p.text}</td>
@@ -64,6 +67,8 @@ function AllPosts() {
         </div>
       )
     }
-}
+    
 
-export default AllPosts;
+  }
+
+
