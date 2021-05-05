@@ -77,7 +77,7 @@ function apiFacade() {
 
     function deleteUser(username) {
         let options = makeOptions("DELETE", true, username);
-        return fetch(userURL + /admin/ + username, options)
+        return fetch(userURL + "admin/" + username, options)
             .then(handleHttpErrors);
     }
     /* ------------------ Options ------------------ */

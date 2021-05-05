@@ -13,21 +13,25 @@ import React from "react"
             <ul className="header">
                 <li><NavLink exact activeClassName="active" to="/">Home</NavLink></li>
                 <li><NavLink activeClassName="active" to="/login">{loginMsg}</NavLink></li>
-                <li><NavLink activeClassName="active" to="/register">Register</NavLink></li>
-            
-            {isLoggedIn && roles==='["user"]' && (
+
+                {!isLoggedIn && (
                 <React.Fragment>
-                    <li><NavLink activeClassName="active" to="/allPosts">All Posts</NavLink></li>
-                    <li><NavLink activeClassName="active" to="/addPost">Add Post</NavLink></li>
+                    <li><NavLink activeClassName="active" to="/register">Register</NavLink></li>
                 </React.Fragment>
-            )}
-            {isLoggedIn && roles==='["admin"]' &&(
-                <React.Fragment>
-                    <li><NavLink activeClassName="active" to="/allPosts">All Posts</NavLink></li>
-                    <li><NavLink activeClassName="active" to="/addPost">Add Post</NavLink></li>
-                    <li><NavLink activeClassName="active" to="/admin">Admin</NavLink></li>
-                </React.Fragment>
-            )}
+                )}
+                {isLoggedIn && roles==='["user"]' && (
+                    <React.Fragment>
+                        <li><NavLink activeClassName="active" to="/allPosts">All Posts</NavLink></li>
+                        <li><NavLink activeClassName="active" to="/addPost">Add Post</NavLink></li>
+                    </React.Fragment>
+                )}
+                {isLoggedIn && roles==='["admin"]' &&(
+                    <React.Fragment>
+                        <li><NavLink activeClassName="active" to="/allPosts">All Posts</NavLink></li>
+                        <li><NavLink activeClassName="active" to="/addPost">Add Post</NavLink></li>
+                        <li><NavLink activeClassName="active" to="/admin">Admin</NavLink></li>
+                    </React.Fragment>
+                )}
             </ul>
         </div>
         );
