@@ -42,35 +42,33 @@ export default function AddPost({ loggedIn }) {
     return (
     
         <div className="container">
-            <div className="row">
-            <div className="col-5"></div>
+          <div className="row">
             <div className="col-5 text-center">
-            <h3 className="mt-5">CoffeeRoom Posts</h3>
-            <hr></hr>
+              <h4 className="mt-5">Add a post</h4>
+              <hr></hr>
 
-        <form className="addPost-form" onSubmit={handleSubmit}>
+              <form className="addPost-form" onSubmit={handleSubmit}>
 
-          <input 
-          onChange={handleChange}
-          value={newPost.title}
-          className = "form-field"
-          placeholder = "Title"
-          id = "title"/>
+                <input 
+                onChange={handleChange}
+                value={newPost.title}
+                className = "form-field"
+                placeholder = "Title"
+                id = "title"/>
 
-          <input 
-          onChange={handleChange}
-          value={newPost.text}
-          className = "form-field"
-          placeholder = "Text"
-          id = "text"/>  
+                <input 
+                onChange={handleChange}
+                value={newPost.text}
+                className = "form-field"
+                placeholder = "Text"
+                id = "text"/>  
 
 
-          <button className = "form-field"
-          type="submit">Add Post</button>
+                <button className = "form-field" type="submit">Add Post</button>
 
-        </form>
-    </div>
-    </div>
-    </div>
+              </form>
+            </div>
+          </div>
+        </div>
     )
 }

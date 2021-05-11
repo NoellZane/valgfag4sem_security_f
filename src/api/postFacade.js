@@ -32,10 +32,12 @@ const getAllPosts = () => {
     .then(handleHttpErrors)
 }
 
-const getPostsByUser = (username) => {
-    let options = makeOptions("GET", true);
-    return fetch(postURL + "all" + username, options)
-    .then(handleHttpErrors)
+function getPostsByUser(username) {
+    let options = makeOptions("GET", false);
+    //console.log("Token: " + getToken())
+    options.headers["x-access-token"] = getToken();
+    return fetch(postURL + username + "/all", options) //Returns promise
+        .then(handleHttpErrors);
 }
 
 function addPost(newPost) {
@@ -45,21 +47,20 @@ function addPost(newPost) {
     return fetch(postURL, options) //Returns promise
         .then(handleHttpErrors);
 }
-/*
-const addPost = (text, title, username) => {
-    let options = makeOptions("POST", true, {
-        title,
-        text,
-        username
 
-    })
-    console.log(options);
-    console.log(options.username);
-    return fetch(postURL, options)
-    .then(handleHttpErrors)
+function deletePost(id) {
+    let options = makeOptions("DELETE", true, id);
+    return fetch(postURL + id, options)
+        .then(handleHttpErrors);
 }
 
-*/
+function editPost(id, newPost) {
+    let options = makeOptions("PUT", true, newPost);
+    // console.log(options);
+    return fetch(postURL + id, options)
+        .then(handleHttpErrors);
+}
+
 const makeOptions = (method, addToken, body) => {
     var opts = {
         method: method,
@@ -81,7 +82,9 @@ return {
     makeOptions,
     getAllPosts,
     getPostsByUser,
-    addPost
+    addPost,
+    deletePost,
+    editPost
 }
 
 }

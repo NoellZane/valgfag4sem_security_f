@@ -13,7 +13,7 @@ import Admin from "./components/Admin";
 //import Post from "./components/Post";
 import AddPost from "./components/AddPost";
 import { LogIn, LoggedIn } from "./components/Login.js";
-
+import MyPosts from "./components/MyPosts";
 
 import {
   BrowserRouter as Router,
@@ -85,6 +85,11 @@ function App() {
               <Route path="/allPosts">
                 {!isLoggedIn ? (<NoMatch />) :
                   (<AllPosts />)}
+              </Route>
+
+              <Route path ="/myPosts">
+                {!isLoggedIn ? (<NoMatch />) :
+                (<MyPosts loggedIn={isLoggedIn}/>)}
               </Route>
 
               <Route path ="/addPost">

@@ -70,3 +70,9 @@ ul.header li a:hover:not(.active) {
 .textInputField{
   size: 30px;
 }
+
+
+#inputID::placeholder {
+  color: black;
+  opacity: 1;
+}

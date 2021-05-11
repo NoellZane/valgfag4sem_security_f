@@ -22,6 +22,7 @@ import React from "react"
                 {isLoggedIn && roles==='["user"]' && (
                     <React.Fragment>
                         <li><NavLink activeClassName="active" to="/allPosts">All Posts</NavLink></li>
+                        <li><NavLink activeClassName="active" to="/myPosts">My Posts</NavLink></li>
                         <li><NavLink activeClassName="active" to="/addPost">Add Post</NavLink></li>
                     </React.Fragment>
                 )}
