@@ -10,7 +10,6 @@ import Header from "./components/Header";
 import Register from "./components/Register";
 import AllPosts from "./components/AllPosts";
 import Admin from "./components/Admin";
-//import Post from "./components/Post";
 import AddPost from "./components/AddPost";
 import { LogIn, LoggedIn } from "./components/Login.js";
 import MyPosts from "./components/MyPosts";

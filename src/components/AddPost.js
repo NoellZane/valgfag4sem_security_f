@@ -44,7 +44,7 @@ export default function AddPost({ loggedIn }) {
         <div className="container">
           <div className="row">
             <div className="col-5 text-center">
-              <h4 className="mt-5">Add a post</h4>
+              <h4 className="mt-5">Add post</h4>
               <hr></hr>
 
               <form className="addPost-form" onSubmit={handleSubmit}>
@@ -55,6 +55,7 @@ export default function AddPost({ loggedIn }) {
                 className = "form-field"
                 placeholder = "Title"
                 id = "title"/>
+                
 
                 <input 
                 onChange={handleChange}
@@ -63,7 +64,7 @@ export default function AddPost({ loggedIn }) {
                 placeholder = "Text"
                 id = "text"/>  
 
-
+                <p></p>
                 <button className = "form-field" type="submit">Add Post</button>
 
               </form>

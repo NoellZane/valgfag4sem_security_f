@@ -1,7 +1,5 @@
 import pfacade from "../api/postFacade"
-import afacade from "../api/apiFacade"
-import React, { useState, useEffect } from "react";
-import jwtdecode from "jwt-decode"
+import React, { useState } from "react";
 
 export default function EditPost({ loggedIn }) {
     const emptyPost = {
@@ -40,7 +38,7 @@ export default function EditPost({ loggedIn }) {
         <div className="container">
           <div className="row">
             <div className="col-5 text-center">
-              <h4 className="mt-5">Edit a post</h4>
+              <h4 className="mt-5">Edit post</h4>
               <hr></hr>
 
               <form className="editPost-form" onSubmit={handleSubmit}>
@@ -66,7 +64,7 @@ export default function EditPost({ loggedIn }) {
                 placeholder = "New text"
                 id = "text"/>  
 
-
+                <p></p>
                 <button className = "form-field" type="submit">Edit Post</button>
 
               </form>

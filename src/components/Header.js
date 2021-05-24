@@ -23,13 +23,12 @@ import React from "react"
                     <React.Fragment>
                         <li><NavLink activeClassName="active" to="/allPosts">All Posts</NavLink></li>
                         <li><NavLink activeClassName="active" to="/myPosts">My Posts</NavLink></li>
-                        <li><NavLink activeClassName="active" to="/addPost">Add Post</NavLink></li>
                     </React.Fragment>
                 )}
                 {isLoggedIn && roles==='["admin"]' &&(
                     <React.Fragment>
                         <li><NavLink activeClassName="active" to="/allPosts">All Posts</NavLink></li>
-                        <li><NavLink activeClassName="active" to="/addPost">Add Post</NavLink></li>
+                        <li><NavLink activeClassName="active" to="/myPosts">My Post</NavLink></li>
                         <li><NavLink activeClassName="active" to="/admin">Admin</NavLink></li>
                     </React.Fragment>
                 )}
@@ -37,25 +36,3 @@ import React from "react"
         </div>
         );
     }
-
-  /*
-export default function Header({roles}){
-return(
-    <ul className="header">
-    <li><NavLink exact activeClassName="selected" to="/">Home</NavLink></li>
-    <li><NavLink activeClassName="selected" to="/login">Login</NavLink></li>
-    <li><NavLink activeClassName="selected" to="/register">Register</NavLink></li>
-    <li><NavLink activeClassName="selected" to="/allPosts">All Posts</NavLink></li>
-    <li><NavLink activeClassName="selected" to="/addPost">Add Post</NavLink></li>
-
-    <li><NavLink activeClassName="selected" to="/post">Post</NavLink></li>
-    {roles==='["admin"]' && <li><NavLink activeClassName="selected" to="/admin">Admin</NavLink></li>}
-
-{/* 
-    {roles==='["user"]' && <li><NavLink activeClassName="selected" to="/post">Post</NavLink></li>} */
-/*}
-
-    </ul>
-);
-}
-*/

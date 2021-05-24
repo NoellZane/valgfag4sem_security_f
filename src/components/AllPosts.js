@@ -58,11 +58,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
       )
     } catch {
       console.log("No posts error.")
+
+
       return (
         <div className="container">
             <div className="row">
               <h3 className="mt-5 text-center">CoffeeRoom Posts</h3>
             </div>
+            
             <div className="row">
               <h5>There are no posts yet.</h5>
             </div>

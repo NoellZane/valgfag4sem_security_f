@@ -109,7 +109,7 @@ import '../App.css';
           <div className="container">
               <div className="row">
                 <div className="col-6">
-                    <h4 className="mt-5 text-center">Your posts:</h4>
+                    <h4 className="mt-5 text-left">Your posts in CoffeeRoom</h4>
                 </div>
                 <div className="col-6 text-right">
                     <button onClick={reload} type="button" className="btn btn-success mt-5">
