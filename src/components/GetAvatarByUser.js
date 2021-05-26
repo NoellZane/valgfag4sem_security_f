@@ -43,7 +43,7 @@ export default function GetAvatarByUser({ loggedIn }) {
 
 
     const displayAvatar = setImageDiv ? (
-        <div id="img">{avatar.image}</div>
+        <div id="img">{avatar}</div>
     ) : "Loading...";
 
     return (

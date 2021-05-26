@@ -31,7 +31,7 @@ function avatarFacade() {
             method: method,
             headers: {
                 "Content-type": "application/json", //Maybe change this if an error occurs
-                'Accept': 'application/json',
+                'Accept': 'application/json', 
             }
         }
         if (addToken && loggedIn()) {
@@ -46,14 +46,19 @@ function avatarFacade() {
     function getAvatarByUser(username) {
         let options = makeOptions("GET", false);
         options.headers["x-access-token"] = getToken();
-        return fetch(avatarURL + username, options)
+        let avatar = fetch(avatarURL + username, options)
+        console.log(avatar);
+        if (!avatar || avatar == null) {
+            avatar.src = 'https://www.minervastrategies.com/wp-content/uploads/2016/03/default-avatar.jpg';
+        }
+        return avatar
             .then(handleHttpErrors);
     }
 
     function uploadAvatar(avatar) {
         let options = makeOptions("POST", false, avatar);
         options.headers["x-access-token"] = getToken();
-        return fetch(avatarURL, options)
+        return fetch(avatarURL + "upload", options)
             .then(handleHttpErrors);
     }
 
