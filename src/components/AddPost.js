@@ -1,7 +1,7 @@
 import pfacade from "../api/postFacade"
 import afacade from "../api/apiFacade"
 import React, { useState, useEffect } from "react";
-import jwtdecode from "jwt-decode"
+import jwtdecode from "jwt-decode";
 
 export default function AddPost({ loggedIn }) {
     const emptyPost = {
