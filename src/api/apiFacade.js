@@ -1,8 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { localURL as URL } from "../utils/settings.js";
-//import { onlineURL as URL } from "../utils/settings.js";
+//import { localURL as URL } from "../utils/settings.js";
+import { onlineURL as URL } from "../utils/settings.js";
 import { userURL } from "../utils/settings.js";
-//import { fetchURL } from "../utils/settings.js";
 
 function handleHttpErrors(res) {
     if (!res.ok) {
@@ -63,7 +62,7 @@ function apiFacade() {
     }
     /* ------------------ CRUD ------------------ */
     function addUser(user) {
-        let options = makeOptions("POST", false, user, )
+        let options = makeOptions("POST", false, user)
         return fetch(userURL, options) //Returns promise
             .then(handleHttpErrors);
     }
