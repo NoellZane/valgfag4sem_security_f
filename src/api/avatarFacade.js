@@ -8,6 +8,14 @@ function handleHttpErrors(res) {
     return res.json();
 }
 
+// Used as an extra measure to view full error messages in console
+function handleErrors(res) {
+    if(!res.ok) {
+        throw Error(res.statusText);
+    }
+    return res;
+}
+
 /*--------------------------------------------------------------*/ 
 
 const getToken = () => {
@@ -59,11 +67,18 @@ function avatarFacade() {
     function uploadAvatar(avatar) {
         //console.log(avatar.username)
         //console.log(avatar.image)
-        console.log(typeof(avatar.image))
+        //console.log(typeof(avatar.image))
         let options = makeOptions("POST", false, avatar);
         options.headers["x-access-token"] = getToken();
         return fetch(avatarURL + "upload", options)
-            .then(handleHttpErrors);
+            .then(handleHttpErrors)
+            // Lines 76-81 may possibly be deleted before handin
+            .then(handleErrors)
+            .then(function(res) {
+                console.log("ok");
+            }).catch(function(error) {
+                console.log(error);
+            });
     }
 
     return {

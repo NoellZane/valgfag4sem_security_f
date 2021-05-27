@@ -25,9 +25,9 @@ export default function UploadAvatar({ loggedIn }) {
 
     const handleSubmit = (evt) => {
         evt.preventDefault()
+        console.log("srcData: " + srcData);
         setNewAvatar({ ...{srcData, username} })
         newAvatar.image = srcData;
-        //console.log("srcData: " + srcData);
         //console.log(newAvatar.image)
         newAvatar.username = username;
         avaFacade.uploadAvatar(newAvatar)
@@ -46,7 +46,7 @@ export default function UploadAvatar({ loggedIn }) {
 
             fileReader.onload = function(fileLoadedEvent) {
                 setSrcData(fileLoadedEvent.target.result)
-                //srcData = fileLoadedEvent.target.result; // Image is now stored in base64 string
+                // srcData = fileLoadedEvent.target.result; // Image is now stored in base64 string
 
                 //console.log("Converted Base64 version of avatar is: " + srcData);
             }
