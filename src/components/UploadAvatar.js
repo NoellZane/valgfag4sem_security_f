@@ -10,22 +10,26 @@ export default function UploadAvatar({ loggedIn }) {
     }
 
     const [newAvatar, setNewAvatar] = useState({ ...emptyAvatar });
+    const [filename, setFilename] = useState("");
+    const [srcData, setSrcData] = useState("");
     const [username, setUsername] = useState("");
 
 
     const handleChange = (evt) => {
+        console.log("VALUE: " + evt.target.files[0].name)
         encodeImageFileAsURL();
-        console.log(evt.target)
+        setFilename(evt.target.files[0].name)
+        //console.log(evt.target)
         setNewAvatar({...newAvatar})
-        
     }
 
     const handleSubmit = (evt) => {
         evt.preventDefault()
-        setNewAvatar({ ...emptyAvatar })
-        newAvatar.image = encodeImageFileAsURL();
+        setNewAvatar({ ...{srcData, username} })
+        newAvatar.image = srcData;
+        //console.log("srcData: " + srcData);
+        //console.log(newAvatar.image)
         newAvatar.username = username;
-        // console.log(encodeImageFileAsURL());
         avaFacade.uploadAvatar(newAvatar)
     }
 
@@ -34,30 +38,33 @@ export default function UploadAvatar({ loggedIn }) {
         var srcData = "";
 
         var filesSelected = document.getElementById("inputFileToLoad").files;
+        console.log("type filesSelected: " + typeof(filesSelected))
         if (filesSelected.length > 0) {
             var fileToLoad = filesSelected[0];
-
+            
             var fileReader = new FileReader();
 
             fileReader.onload = function(fileLoadedEvent) {
-                srcData = fileLoadedEvent.target.result; // Image is now stored in base64 string
+                setSrcData(fileLoadedEvent.target.result)
+                //srcData = fileLoadedEvent.target.result; // Image is now stored in base64 string
 
-                console.log("Converted Base64 version of avatar is: " + srcData);
+                //console.log("Converted Base64 version of avatar is: " + srcData);
             }
             fileReader.readAsDataURL(fileToLoad);
-        }
-        return srcData;
+        } 
     }
 
     /*--------------------------------------------------------------*/
 
     useEffect(() => {
+        
         if (loggedIn) {
             const token = afacade.getToken();
             const decodedToken = jwtdecode(token);
 
             setUsername(decodedToken.username);
         }
+        
     }, [loggedIn])
 
     /*--------------------------------------------------------------*/
@@ -74,7 +81,7 @@ export default function UploadAvatar({ loggedIn }) {
                         <input
                             onChange={handleChange}
                             type="file"
-                            value={newAvatar.image}
+                            //value={filename}
                             id="inputFileToLoad" />
 
                         <button className="form-field" type="submit">Upload Avatar</button>

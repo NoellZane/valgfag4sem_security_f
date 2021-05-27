@@ -46,6 +46,7 @@ function avatarFacade() {
     function getAvatarByUser(username) {
         let options = makeOptions("GET", false);
         options.headers["x-access-token"] = getToken();
+        console.log("username: " + username);
         let avatar = fetch(avatarURL + username, options)
         console.log(avatar);
         if (!avatar || avatar == null) {
@@ -56,6 +57,9 @@ function avatarFacade() {
     }
 
     function uploadAvatar(avatar) {
+        //console.log(avatar.username)
+        //console.log(avatar.image)
+        console.log(typeof(avatar.image))
         let options = makeOptions("POST", false, avatar);
         options.headers["x-access-token"] = getToken();
         return fetch(avatarURL + "upload", options)
