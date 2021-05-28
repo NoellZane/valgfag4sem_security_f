@@ -35,7 +35,6 @@ export default function UploadAvatar({ loggedIn }) {
 
     function encodeImageFileAsURL() {
         let medBlobSize = 16777215;
-        var srcData = "";
 
         var filesSelected = document.getElementById("inputFileToLoad").files;
         console.log("type filesSelected: " + typeof(filesSelected))
