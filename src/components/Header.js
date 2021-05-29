@@ -21,6 +21,7 @@ import React from "react"
                 )}
                 {isLoggedIn && roles==='["user"]' && (
                     <React.Fragment>
+                        <li><NavLink activeClassName="active" to="/myProfile">My Profile</NavLink></li>
                         <li><NavLink activeClassName="active" to="/allPosts">All Posts</NavLink></li>
                         <li><NavLink activeClassName="active" to="/myPosts">My Posts</NavLink></li>
                     </React.Fragment>

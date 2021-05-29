@@ -13,6 +13,8 @@ import Admin from "./components/Admin";
 import AddPost from "./components/AddPost";
 import { LogIn, LoggedIn } from "./components/Login.js";
 import MyPosts from "./components/MyPosts";
+import UploadAvatar from "./components/UploadAvatar";
+import MyProfile from "./components/MyProfile";
 
 import {
   BrowserRouter as Router,
@@ -94,6 +96,16 @@ function App() {
               <Route path ="/addPost">
                 {!isLoggedIn ? (<NoMatch />) :
                 (<AddPost loggedIn={isLoggedIn}/>)}
+              </Route>
+
+              <Route path ="/uploadAvatar">
+                {!isLoggedIn ? (<NoMatch />) :
+                (<UploadAvatar loggedIn={isLoggedIn}/>)}
+              </Route>
+
+              <Route path ="/myProfile">
+                {!isLoggedIn ? (<NoMatch />) :
+                (<MyProfile loggedIn={isLoggedIn}/>)}
               </Route>
 
               <Route path ="/admin">
