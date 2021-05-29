@@ -73,18 +73,13 @@ function avatarFacade() {
         reader.readAsDataURL(blob);
     });
 
+    
     function getAvatarByUser(username) {
         let options = makeOptions("GET", false);
+        //console.log("Token: " + getToken())
         options.headers["x-access-token"] = getToken();
-        console.log("username: " + username);
-        // let avatar = fetch(avatarURL + username, options)
-        //     .then(response => response.blob())
-        let avatar = fetch(avatarURL + username, options)
-        .then(console.log);
-        if (!avatar || avatar == null) {
-            avatar.src = 'https://www.minervastrategies.com/wp-content/uploads/2016/03/default-avatar.jpg';
-        }
-        return avatar;
+        return fetch(avatarURL + username, options) //Returns promise
+            .then(handleHttpErrors);
     }
 
     function uploadAvatar(avatar) {

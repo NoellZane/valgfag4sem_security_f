@@ -12,7 +12,7 @@ export default function GetAvatarByUser({ loggedIn }) {
         image: "",
     }
 
-    const [avatar, setAvatar] = useState("");
+    const [avatarImage, setAvatarImage] = useState("");
     const [render, setRender] = useState(false);
     const [usernameButton, setUsernameButton] = useState(false);
     //const [newAvatar, setNewAvatar] = useState({ ...emptyAvatar });
@@ -33,8 +33,8 @@ export default function GetAvatarByUser({ loggedIn }) {
                 //         var base64data = reader.result
                 //         setAvatar(base64data);
                 //     }
-                console.log("DATA TYPE: " + typeof (data));
-                setAvatar(data);
+                console.log("DATA TYPE: " + typeof (data.avatarImage));
+                setAvatarImage(data.avatarImage);
             });
         console.log("Username: " + username);
         setUsernameButton(username);
@@ -53,13 +53,6 @@ export default function GetAvatarByUser({ loggedIn }) {
         };
     }, [loggedIn])
 
-
-    const displayAvatar = setImageDiv ? (
-        <div className="col-12">
-            <img src={avatar} alt="Red dot" />
-        </div>
-    ) : "Loading...";
-
     return (
 
         <React.Fragment>
@@ -74,7 +67,9 @@ export default function GetAvatarByUser({ loggedIn }) {
                 <hr></hr>
 
                 <div className="row">
-                    {displayAvatar}
+                    <div className="col-12">
+                        <img src={avatarImage} alt="PB" />
+                    </div>
                 </div>
             </div>
         </React.Fragment>
