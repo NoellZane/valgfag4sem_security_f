@@ -15,17 +15,21 @@ export default function GetAvatarByUser({ loggedIn }) {
     const [avatar, setAvatar] = useState([]);
     const [render, setRender] = useState(false);
     const [usernameButton, setUsernameButton] = useState(false);
-    const [newAvatar, setNewAvatar] = useState({ ...emptyAvatar });
+    //const [newAvatar, setNewAvatar] = useState({ ...emptyAvatar });
     const [imageDiv, setImageDiv] = useState("");
     const [image, setImage] = useState("");
 
     function fetchAvatar(username) {
         facade.getAvatarByUser(username)
             .then((data) => {
+                console.log(typeof("what: " + data.avatarImage))
                 // Converting Blob data to Base64 and setting it to avatar const
                 var newData = JSON.stringify(data);
+                console.log(data)
                 var obj = JSON.parse(newData);
                 var reader = new FileReader();
+                    console.log(obj)
+                    console.log(typeof(obj.avatarImage))
                 reader.readAsDataURL(obj.avatarImage);
                 reader.onloadend = function() {
                     var base64data = reader.result

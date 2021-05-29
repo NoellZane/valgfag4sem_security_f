@@ -30,3 +30,4 @@ export default function MyProfile({ loggedIn }) {
         </React.Fragment>
     )
 }
+//<GetAvatarByUser loggedIn={loggedIn} />
