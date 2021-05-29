@@ -12,7 +12,7 @@ export default function GetAvatarByUser({ loggedIn }) {
         image: "",
     }
 
-    const [avatar, setAvatar] = useState([]);
+    const [avatar, setAvatar] = useState("");
     const [render, setRender] = useState(false);
     const [usernameButton, setUsernameButton] = useState(false);
     const [newAvatar, setNewAvatar] = useState({ ...emptyAvatar });
@@ -22,16 +22,18 @@ export default function GetAvatarByUser({ loggedIn }) {
     function fetchAvatar(username) {
         facade.getAvatarByUser(username)
             .then((data) => {
-                // Converting Blob data to Base64 and setting it to avatar const
-                var newData = JSON.stringify(data);
-                var obj = JSON.parse(newData);
-                var reader = new FileReader();
-                reader.readAsDataURL(obj.avatarImage);
-                reader.onloadend = function() {
-                    var base64data = reader.result
-                    setAvatar(base64data);
-                }
-                // setAvatar(data.avatar);
+                //     // Converting Blob data to Base64 and setting it to avatar const
+                //     var newData = JSON.stringify(data);
+                //     var obj = JSON.parse(newData);
+                //     var reader = new FileReader();
+                //     console.log(obj.avatarImage);
+                //     reader.readAsDataURL(obj.avatarImage);
+                //     reader.onloadend = function() {
+                //         var base64data = reader.result
+                //         setAvatar(base64data);
+                //     }
+                console.log("DATA TYPE: " + typeof (data));
+                setAvatar(data);
             });
         console.log("Username: " + username);
         setUsernameButton(username);
@@ -53,7 +55,7 @@ export default function GetAvatarByUser({ loggedIn }) {
 
     const displayAvatar = setImageDiv ? (
         <div className="col-12">
-                <div id="img">{avatar}</div>
+            <img src={avatar} alt="Red dot" />
         </div>
     ) : "Loading...";
 
@@ -71,7 +73,7 @@ export default function GetAvatarByUser({ loggedIn }) {
                 <hr></hr>
 
                 <div className="row">
-                        {displayAvatar}
+                    {displayAvatar}
                 </div>
             </div>
         </React.Fragment>
