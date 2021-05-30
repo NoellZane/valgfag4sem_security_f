@@ -29,6 +29,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
               </div>
               <hr></hr>
 
+                <p>Please refrain from using profanity or leaking other people's personal information.</p>
               <div className="row">
                 <table className="table">
                   <thead>
